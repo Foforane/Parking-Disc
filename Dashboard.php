@@ -88,11 +88,12 @@ $_SESSION['Iden_Num'] = $dID;
 $sql = "INSERT INTO dropoff (ID_Number,dSurname,dName,Relationship,pNumber,sNumber,dAddress,Student_Staff_No) 
 VALUES ('$dID','$dSurname','$dName','$Rel','$pNumber','$sNumber','$Address','$StudentNo') ";
 if($conn->query($sql) === TRUE){
-$_SESSION['sMessage'] = "You have successfully Registered a Drop off' s Personal information, You can now their car(s) here";
+$_SESSION['sMessage'] = "You have successfully Registered a Drop off' s Personal information, You can now add their car(s) here";
 $successPage = true;
   
-$showInfo = true;
+
 $_SESSION['carFor'] ="Drop Off";
+$ShowInfo = true;
 }  else {
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
@@ -237,7 +238,7 @@ VALUES ('$RegNo','$model','$make','$color','$vin','$Username','$CarOwner')";
 if ($conn->query($sql) === TRUE) {
   $_SESSION['sMessage'] = $vin. " You have successfully Registered a car with a parking Disc of ".$CarOwner." and the unique identifier of ".$Username;
     $successPage = true;
-  $showInfo = true;
+  $ShowInfo = true;
     
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;

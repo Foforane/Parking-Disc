@@ -2,6 +2,7 @@
 $type = $_SESSION['carType'];
 $IdenNum =  $_SESSION['IdenNum'];
 $showStudent = false;
+$showDropOff = false;
 
 if($type == "Student"){
 include "DB.php";
@@ -15,8 +16,22 @@ if($result->num_rows > 0){
   array_push($studentData,$row);
  }
  $student = $studentData[0];
+ $conn->close();
 ?>
-<?php } 
+<?php } else if($type == "Drop Off"){
+ include "DB.php";
+ $sql = "SELECT * FROM dropoff WHERE ID_Number = '$IdenNum'";
+ 
+ $result = $conn->query($sql);
+ $dropOffData = array();
+ if($result->num_rows > 0){
+   $row = $result->fetch_assoc();
+   $showDropOff = true;
+
+  }
+  $drop = $row;
+  $conn->close();
+} 
 if($showStudent){ ?>
 <h2>The car is owned by a Student</h2>
 <div class="table-responsive">
@@ -74,7 +89,59 @@ if($showStudent){ ?>
 </tbody>
 </table>
 </div>
-<?php }
-
+<?php } else if ($showDropOff) {
 ?>
+<h2>The car is owned by a Drop off</h2>
+<div class="table-responsive">
+<table  class="table table-hover">
+<thead>
+<tr>
+      <th scope="col"><?php echo $drop["dName"][0]." ".$drop['dSurname'];?></th>
+     
+    </tr>
+<thead>
+  <tbody>
+  <tr>
+   <td>ID Number</td> 
+  <td>
+  <?php echo $drop['ID_Number']?>
+</td>
+</tr>
+
+
+<tr>
+   <td>Mobile Number</td> 
+  <td>
+  <?php echo $drop['pNumber']?>
+</td>
+</tr>
+<tr>
+   <td>Secondary Number</td> 
+  <td>
+  <?php echo $drop['sNumber']?>
+</td>
+</tr>
+<tr>
+   <td>Address</td> 
+  <td>
+  <?php echo $drop['dAddress']?>
+</td>
+</tr>
+
+<tr>
+   <td>Associated with</td> 
+  <td>
+  <?php echo $drop['Student_Staff_No']?>
+</td>
+<tr>
+   <td>Relationship</td> 
+  <td>
+  <?php echo $drop['Relationship']?>
+</td>
+</tr>
+</tr>
+</tbody>
+</table>
+</div>
+<?php } ?>
 

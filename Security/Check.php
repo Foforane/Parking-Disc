@@ -1,5 +1,5 @@
 <div class="inner">
-<h2>Welcome</h2>
+<h2>Query a car using its Registration Number!</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" Method = "POST">
 <label for="Reg_">Query car</label>
 <input type="text" id = "Reg_" name="reg">
