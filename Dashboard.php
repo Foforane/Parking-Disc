@@ -196,11 +196,11 @@ if(isset($_POST['RegContractor'])){
   $fName = $_POST['fName'];
   $lName = $_POST['lName'];
   $phone_no = $_POST['PhoneNumber'];
-  $projNo = $_SESSION['Iden_Num'];
+ 
  include "DB.php";
  $staff = $_SESSION['Username'];
- $sql = "INSERT INTO contractors (cId_Number,cFirstName,cLastName,cPhoneNumber,project_NO,Staff_No) 
- VALUES ('$cId_Number','$fName','$lName','$phone_no','$projNo','$staff') ";
+ $sql = "INSERT INTO contractor (cId_Number,cFirstName,cLastName,cPhoneNumber,Staff_No) 
+ VALUES ('$cId_Number','$fName','$lName','$phone_no','$staff') ";
  if($conn->query($sql) === TRUE){
    $_SESSION['sMessage'] = "You have successfully Registered a Contractor, You can now add their Car(s)";
      $successPage = true;

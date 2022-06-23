@@ -16,7 +16,7 @@ if ($result->num_rows > 0) {
       
      }
     }
-include "DB.php";
+
 $sql = "SELECT * FROM dropoff  WHERE Student_Staff_No = '$Username'";
 $results = $conn->query($sql);
 $drops = [];
@@ -44,12 +44,36 @@ if ($result->num_rows > 0) {
 $sql = "SELECT * FROM project  WHERE Staff_No = '$Username'";
 $results = $conn->query($sql);
 $projects = [];
-$contractors = [];
+
 if($results->num_rows > 0){
   $showProjects = true;
   while($line = $results->fetch_assoc()){ 
     array_push($projects,$line);
 
+     }
+   
+        
+}
+$sql = "SELECT * FROM contractor  WHERE Staff_No = '$Username'";
+$results = $conn->query($sql);
+
+$contractors = [];
+if($results->num_rows > 0){
+  $showContractor = true;
+  while($line = $results->fetch_assoc()){ 
+    array_push($contractors,$line);
+    $ID = $line['cId_Number'];
+    $sql = "SELECT * FROM car WHERE Iden_Num = '$ID'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+$showCar =true;
+while($line = $result->fetch_assoc()){ 
+array_push($cars,$line);
+  
+ }
+  
+ }
      }
    
         
@@ -308,13 +332,15 @@ if($showDrop){
 <th scope = "col">Projects</th>
 </tr>
     <tr>
-      <th scope="col">Project Number</th>
+      <th scope="col">#</th>
+      <th scope="col">Project By</th>
       <th scope="col">Name of Organization</th>
       
       <th scope="col">Address of Organization</th>
       
       <th scope="col">Start Date</th>
       <th scope="col">End Date</th>
+      <th scope="col">Type of contractor</th>
       <th scope = "col">Add Contractor</th>
          
     </tr>
@@ -329,6 +355,7 @@ if($showDrop){
   <tr>
   <th scope= "row"><?php echo $i;?></th>
   <td><?php echo $project['Staff_No']?></td>
+
   <td><?php echo $project['pNameOfOrganization']?></td>
   <td><?php echo $project['pAddressOfOrganization']?></td>
   <td><?php echo $project['pStartDate']?></td>
@@ -357,7 +384,7 @@ if($showDrop){
 <th scope = "col">Contractors</th>
 </tr>
     <tr>
-      <th scope="col">Project Number</th>
+      <th scope="col">#</th>
       <th scope="col">ID Number</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
@@ -370,11 +397,13 @@ if($showDrop){
 
    
    <?php 
-  
-  foreach($contractors as $contractor) { ?>
+  $i = 0;
+  foreach($contractors as $contractor) {
+    $i ++;
+    ?>
   
   <tr>
-  <th scope= "row"><?php echo $contractor['project_NO'];?></th>
+  <th scope= "row"><?php echo $i;?></th>
   <td><?php echo $contractor['cId_Number']?></td>
   <td><?php echo $contractor['cFirstName']?></td>
   <td><?php echo $contractor['cLastName']?></td>
