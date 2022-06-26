@@ -73,6 +73,12 @@ if($showStudent){ ?>
 <thead>
   <tbody>
   <tr>
+   <td>Car Description</td> 
+  <td>
+  <?php echo  $_SESSION['CarDes'];?>
+</td>
+</tr>
+  <tr>
    <td>Student Number</td> 
   <td>
   <?php echo $student['Student_No']?>
@@ -132,6 +138,12 @@ if ($showDropOff) {
 <thead>
   <tbody>
   <tr>
+   <td>Car Description</td> 
+  <td>
+  <?php echo  $_SESSION['CarDes'];?>
+</td>
+</tr>
+  <tr>
    <td>ID Number</td> 
   <td>
   <?php echo $drop['ID_Number']?>
@@ -188,6 +200,12 @@ echo $staff['title']." ".$name[0]. " ".$staff['Surname'];?></th>
 <thead>
   <tbody>
   <tr>
+   <td>Car Description</td> 
+  <td>
+  <?php echo  $_SESSION['CarDes'];?>
+</td>
+</tr>
+  <tr>
    <td>Staff Number</td> 
   <td>
   <?php echo $staff['Staff_No']?>
@@ -235,6 +253,12 @@ if($showContract){
     </tr>
 <thead>
   <tbody>
+  <tr>
+   <td>Car Description</td> 
+  <td>
+  <?php echo  $_SESSION['CarDes'];?>
+</td>
+</tr>
   <tr>
    <td>ID Number</td> 
   <td>

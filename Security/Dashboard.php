@@ -41,7 +41,7 @@ if(isset($_POST['Query'])){
   $row = $result->fetch_assoc();
   
   $carFor = $row['car_for'];
-
+  $_SESSION['CarDes'] = $row['color']." ".$row['make']." ".$row['model'];
   $_SESSION['carType'] = $carFor;
   $_SESSION['IdenNum'] = $row['Iden_Num'];
   
