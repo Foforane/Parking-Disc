@@ -175,8 +175,9 @@ if(isset($_POST['RegProject'])){
 
 include "DB.php";
 $staff = $_SESSION['Username'];
-$sql = "INSERT INTO project (Staff_No,pNameOfOrganization,pAddressOfOrganization,pStartDate,pEndDate,pAppointmentType) 
-VALUES ('$staff','$projName','$projAddress','$pStartDate','$pEndDate','Permanent') ";
+$project_Id = uniqid(rand (),true);
+$sql = "INSERT INTO project (project_Id,pNameOfOrganization,pAddressOfOrganization,pStartDate,pEndDate,pAppointmentType,Staff_No) 
+VALUES ('$project_Id','$projName','$projAddress','$pStartDate','$pEndDate','Permanent','$staff') ";
 if($conn->query($sql) === TRUE){
   $_SESSION['sMessage'] = "You have successfully Registered a Project, You can now contractors";
     $successPage = true;
@@ -196,6 +197,7 @@ if(isset($_POST['RegContractor'])){
   $fName = $_POST['fName'];
   $lName = $_POST['lName'];
   $phone_no = $_POST['PhoneNumber'];
+  
  
  include "DB.php";
  $staff = $_SESSION['Username'];
