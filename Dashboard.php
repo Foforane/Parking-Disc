@@ -101,7 +101,7 @@ $conn->close();
 }
 if(isset($_GET['addProj'])){
   $_SESSION['carFor'] ="Contractor";
-  $_SESSION['Iden_Num'] = trim($_GET['addProj']);
+  $_SESSION['project_Id'] = trim($_GET['addProj']);
   $addContractor = true;
 }
 if(isset($_GET['addCon'])){
@@ -197,12 +197,12 @@ if(isset($_POST['RegContractor'])){
   $fName = $_POST['fName'];
   $lName = $_POST['lName'];
   $phone_no = $_POST['PhoneNumber'];
-  
+  $project_Id = $_SESSION['project_Id'];
  
  include "DB.php";
- $staff = $_SESSION['Username'];
- $sql = "INSERT INTO contractor (cId_Number,cFirstName,cLastName,cPhoneNumber,Staff_No) 
- VALUES ('$cId_Number','$fName','$lName','$phone_no','$staff') ";
+
+ $sql = "INSERT INTO contractor (cId_Number,cFirstName,cLastName,cPhoneNumber,project_Id) 
+ VALUES ('$cId_Number','$fName','$lName','$phone_no','$project_Id') ";
  if($conn->query($sql) === TRUE){
    $_SESSION['sMessage'] = "You have successfully Registered a Contractor, You can now add their Car(s)";
      $successPage = true;

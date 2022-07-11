@@ -49,12 +49,14 @@ if($results->num_rows > 0){
   $showProjects = true;
   while($line = $results->fetch_assoc()){ 
     array_push($projects,$line);
-
+     
      }
    
         
 }
-$sql = "SELECT * FROM contractor  WHERE Staff_No = '$Username'";
+
+
+$sql = "SELECT * FROM contractor";
 $results = $conn->query($sql);
 
 $contractors = [];
@@ -362,7 +364,7 @@ if($showDrop){
   <td><?php echo $project['pEndDate']?></td>
   <td><?php echo $project['pAppointmentType']?></td>
 
-  <td> <a href="Dashboard.php?addProj=<?php echo $project['Staff_No'];?>" class = "btn btn-primary">Add</a></td>
+  <td> <a href="Dashboard.php?addProj=<?php echo $project['project_Id'];?>" class = "btn btn-primary">Add</a></td>
 </tr>
   
 
