@@ -49,14 +49,8 @@ if($results->num_rows > 0){
   $showProjects = true;
   while($line = $results->fetch_assoc()){ 
     array_push($projects,$line);
-     
-     }
-   
-        
-}
-
-
-$sql = "SELECT * FROM contractor";
+    $id = $line['project_Id'];
+    $sql = "SELECT * FROM contractor where project_Id = '$id'";
 $results = $conn->query($sql);
 
 $contractors = [];
@@ -77,6 +71,14 @@ array_push($cars,$line);
   
  }
      }
+     
+     }
+   
+        
+}
+
+
+
    
         
 }
