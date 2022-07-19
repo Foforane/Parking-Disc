@@ -26,11 +26,43 @@ if(!isset($_SESSION['security'])){
   exit();
 }
 
- $showInfo = $checkCar = $showAppointee = $showDrop =$showStaff = $showContractor = $showStudent = false ;
+$RegCar = $showInfo = $checkCar = $showAppointee = $showDrop =$showStaff = $showContractor = $showStudent = false ;
  if(isset($_POST['checkCar'])){
   $checkCar = true;
-
 } 
+if(isset($_POST['regUser'])){
+  $User = $_POST['Reg_type'];
+     $Username = trim($_POST['sNum']);
+    
+     echo "hey";
+      
+     include "DB.php";
+     if($User == "Student"){
+         $sql = "SELECT * FROM regstudents WHERE StudentNo = '$Username'";
+     }else{
+        $sql = "SELECT * FROM regstaff WHERE StaffNo = '$Username' ";
+         
+     }                              
+         $results = $conn->query($sql);
+         if($results->num_rows > 0){
+          $row = $results->fetch_assoc();
+          $_SESSION['User'] = $User;
+          $_SESSION['Username'] = $Username;
+          $_SESSION['Allow'] = "Allow";
+          $_SESSION['carFor'] = "";
+          $_SESSION['Role'] = $row['Role'];
+          $_SESSION['Iden_Num']  = "";
+          $_SESSION['sMessage']="";
+          $_SESSION['Admin']="yes";
+        
+          header("Location:../index.php");
+          exit();
+
+         }else{
+             $error= "Wrong ".$User." Number or Pin";
+         }
+         $conn->close();
+}
 if(isset($_POST['Query'])){
  include "DB.php";
  $RegNum = trim($_POST['reg']);
@@ -47,6 +79,11 @@ if(isset($_POST['Query'])){
   
  }
 }
+if(isset($_POST['RegCar'])){
+  
+  $RegCar = true;
+ 
+ }
 ?>
 <br><br><br><br>
 <div class="contain">
@@ -75,7 +112,7 @@ if(isset($_POST['Query'])){
             <input class = "linkbtn " class = "foc" type="submit" name = "checkCar" value="Check Car">
             </li>
             <li class="nav-item">
-            <input class = "linkbtn" type="submit" name = "CheckUser" value="Check User">
+            <input class = "linkbtn" type="submit" name = "RegCar" value="Register User">
             </li>
           
             <li class="nav-item">
@@ -88,6 +125,9 @@ if(isset($_POST['Query'])){
       </nav>   
   <br><br>
  <?php 
+ if($RegCar){
+  include "regCar.php";
+ }
 if($checkCar){
   include "Check.php";
 }
@@ -104,6 +144,8 @@ if($showInfo){
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
- 
+<script src = "script.js" > 
+
+</script>
 </body>
 </html>
