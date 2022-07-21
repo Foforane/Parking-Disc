@@ -26,9 +26,12 @@ if(!isset($_SESSION['security'])){
   exit();
 }
 
-$RegCar = $showInfo = $checkCar = $showAppointee = $showDrop =$showStaff = $showContractor = $showStudent = false ;
+$RegCar = $showReport = $checkCar = $showAppointee = $showDrop =$showStaff = $showContractor = $showStudent = false ;
  if(isset($_POST['checkCar'])){
   $checkCar = true;
+}
+if(isset($_POST['report'])){
+  $showReport = true;
 } 
 if(isset($_POST['regUser'])){
   $User = $_POST['Reg_type'];
@@ -116,7 +119,7 @@ if(isset($_POST['RegCar'])){
             </li>
           
             <li class="nav-item">
-            <input class = "linkbtn" type="submit" name = "ShowInfo" value="View all Registered users">
+            <input class = "linkbtn" type="submit" name = "report" value="View all Registered users">
             </li>
         
           </ul>
@@ -131,8 +134,8 @@ if(isset($_POST['RegCar'])){
 if($checkCar){
   include "Check.php";
 }
-if($showInfo){
-  include "Showinfo.php";
+if($showReport){
+  include "report.php";
 }
  ?>
 

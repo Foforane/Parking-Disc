@@ -1,10 +1,4 @@
-<?php
 
-if(!isset($_SESSION['security'])){
-  header('Location:login.php');
-  
-  exit();
-}?>
 <form method = "POST" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 <div class="card-deck">
   <div class="card">
