@@ -1,6 +1,8 @@
 <?php
+
 session_start();
-if($_SESSION['Admin']="yes"){
+
+if(isset($_SESSION['Admin'])){
     
 session_unset();
 session_destroy();

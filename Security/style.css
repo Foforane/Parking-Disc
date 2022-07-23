@@ -7,6 +7,10 @@
   padding : 1rem;
   
 }
+.sig{
+  width: 15%;
+  border-top: 0.5rem solid #000 !important;
+}
 .success{
   color:green;
 }

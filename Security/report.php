@@ -14,12 +14,14 @@ if(!isset($_SESSION['security'])){
   $staffCars = $result->fetch_assoc()['total'];
   $totalownCar = $studentCars + $staffCars;
  //Students Drop Off
-  $sql = "select count(*) as total from car where car_for = 'Drop Off' and Length(Iden_Num) = 9";
+  $sql = "select count(*) as total from car 
+  INNER JOIN dropoff ON car.Iden_Num = dropoff.ID_Number where car_for = 'Drop Off' and Length(Student_Staff_No) = 9";
   $result = $conn->query($sql);
   $studentDropOff = $result->fetch_assoc()['total'];
   //Staff Drop off
  
-  $sql = "select count(*) as total from car where car_for = 'Drop Off' and Length(Iden_Num) != 9";
+  $sql = "select count(*) as total from car 
+  INNER JOIN dropoff ON car.Iden_Num = dropoff.ID_Number where car_for = 'Drop Off' and Length(Student_Staff_No) != 9";
   $result = $conn->query($sql);
   $staffDropOff = $result->fetch_assoc()['total'];
   $totalDropOff = $staffDropOff + $studentDropOff;
@@ -113,3 +115,14 @@ if(!isset($_SESSION['security'])){
 </tr>
 </tbody>
 </table>
+<label>Number of cars: 43</label><br>
+<div class="dont-print-that">
+<input type="submit" class = "btn btn-primary" value="Print" onclick="window.print()" name = "print">
+</div>
+<br><br><br><br>
+<div>
+Signature
+<br><br>
+__________________<br>
+Admin
+</div>
